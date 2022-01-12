@@ -27,7 +27,13 @@ function Listing(){
                 </div>
                     <div className="col-sm-6 col-lg-4 col-xl-3 mb-3">
                     <MovieCards />
-                </div>             
+                </div>
+                <div className="col-sm-6 col-lg-4 col-xl-3 mb-3">
+                    <MovieCards />
+                </div>
+                <div className="col-sm-6 col-lg-4 col-xl-3 mb-3">
+                    <MovieCards />
+                </div>                                     
             </div>
         </div>
         </>

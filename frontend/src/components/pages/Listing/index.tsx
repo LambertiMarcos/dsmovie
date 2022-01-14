@@ -6,54 +6,49 @@ import Pagination from "../../Pagination";
 import { MoviePage } from '../../../types/movie';
 
 
-function Listing(){
+function Listing() {
 
     const [pageNamber, setPageNumber] = useState(0);
 
+    const [page, setpage] = useState<MoviePage>(
+        {
+            content: [],
+            last: true,
+            totalPages: 0,
+            totalElements: 0,
+            size: 12,
+            number: 0,
+            first: true,
+            numberOfElements: 0,
+            empty: true
+        }
+    );
+
     useEffect(() => {
-            axios.get(`${BASE_URL}/movies?size=12&page=1`)
-                .then(response => {
-                    const data = response.data as MoviePage;
-                    console.log(data);
-                    setPageNumber(data.number);
-                });
-    },[])
-
-
+        axios.get(`${BASE_URL}/movies?size=12&page=${pageNamber}`)
+            .then(response => {
+                const data = response.data as MoviePage;
+                setpage(data);
+                //console.log(data);
+                //setPageNumber(data.number);
+            });
+    }, [pageNamber])
 
     return (
         <>
-        <p>{pageNamber}</p>
-        <Pagination />
 
-        <div className="container">
-            <div className="row">
-                <div className="col-sm-6 col-lg-4 col-xl-3">
-                        <MovieCards />
+            <Pagination />
+
+            <div className="container">
+                <div className="row">
+                    {page.content.map(movie => (
+                        <div key={movie.id} className="col-sm-6 col-lg-4 col-xl-3">
+                            <MovieCards movie={movie}/>
+                        </div>
+                    )
+                )}
                 </div>
-                <div className="col-sm-6 col-lg-4 col-xl-3 mb-3">
-                    <MovieCards />
-                </div>   
-                    <div className="col-sm-6 col-lg-4 col-xl-3 mb-3">
-                    <MovieCards />
-                </div>
-                    <div className="col-sm-6 col-lg-4 col-xl-3 mb-3">
-                    <MovieCards />
-                </div>
-                    <div className="col-sm-6 col-lg-4 col-xl-3 mb-3">
-                    <MovieCards />
-                </div>
-                    <div className="col-sm-6 col-lg-4 col-xl-3 mb-3">
-                    <MovieCards />
-                </div>
-                <div className="col-sm-6 col-lg-4 col-xl-3 mb-3">
-                    <MovieCards />
-                </div>
-                <div className="col-sm-6 col-lg-4 col-xl-3 mb-3">
-                    <MovieCards />
-                </div>                                     
             </div>
-        </div>
         </>
     );
 }

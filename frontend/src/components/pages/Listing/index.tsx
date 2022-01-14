@@ -10,8 +10,7 @@ function Listing() {
 
     const [pageNamber, setPageNumber] = useState(0);
 
-    const [page, setpage] = useState<MoviePage>(
-        {
+    const [page, setPage] = useState<MoviePage>({
             content: [],
             last: true,
             totalPages: 0,
@@ -28,7 +27,7 @@ function Listing() {
         axios.get(`${BASE_URL}/movies?size=12&page=${pageNamber}`)
             .then(response => {
                 const data = response.data as MoviePage;
-                setpage(data);
+                setPage(data);
                 //console.log(data);
                 //setPageNumber(data.number);
             });
@@ -36,17 +35,16 @@ function Listing() {
 
     return (
         <>
-
             <Pagination />
 
             <div className="container">
                 <div className="row">
-                    {page.content.map(movie => (
+                    {page.content.map(movie =>(
                         <div key={movie.id} className="col-sm-6 col-lg-4 col-xl-3">
-                            <MovieCards movie={movie}/>
+                            <MovieCards movie = {movie} />
                         </div>
-                    )
-                )}
+                        )
+                    )}
                 </div>
             </div>
         </>

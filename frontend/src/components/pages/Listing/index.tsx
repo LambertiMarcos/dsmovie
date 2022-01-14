@@ -1,8 +1,15 @@
+import axios from "axios";
+import { BASE_URL } from "../../../utils/requests";
 import MovieCards from "../../MovieCards";
 import Pagination from "../../Pagination";
 
 
 function Listing(){
+
+    axios.get(`${BASE_URL}/movies?size=12&page=0`)
+    .then(response => {
+        console.log(response.data);
+    });
 
     return (
         <>

@@ -31,6 +31,7 @@ function Listing() {
                 //console.log(data);
                 //setPageNumber(data.number);
             });
+
     }, [pageNamber]);
 
     const handlePageChange = (newNumber: number) => {
